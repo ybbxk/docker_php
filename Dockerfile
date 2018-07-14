@@ -47,5 +47,10 @@ RUN chmod 755 /usr/local/bin/phpunit
 WORKDIR /workspace
 RUN usermod -u 1000 www-data
 
+RUN composer global require "squizlabs/php_codesniffer=*"
+
+ADD http://static.phpmd.org/php/latest/phpmd.phar /user/local/bin/phpmd
+RUN chmod 755 /user/local/bin/phpmd
+
 VOLUME ["/opt"]
 VOLUME ["/workspace"]
