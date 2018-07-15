@@ -51,8 +51,8 @@ RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-di
 
 RUN composer global require "squizlabs/php_codesniffer=*"
 
-ADD http://static.phpmd.org/php/latest/phpmd.phar /user/local/bin/phpmd
-RUN chmod 755 /user/local/bin/phpmd
+ADD http://static.phpmd.org/php/latest/phpmd.phar /usr/local/bin/phpmd
+RUN chmod 755 /usr/local/bin/phpmd
 
 RUN  echo "export PATH=$PATH:/root/.composer/vendor/bin/" >> /root/.bashrc
 
