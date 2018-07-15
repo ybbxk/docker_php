@@ -54,5 +54,7 @@ RUN composer global require "squizlabs/php_codesniffer=*"
 ADD http://static.phpmd.org/php/latest/phpmd.phar /user/local/bin/phpmd
 RUN chmod 755 /user/local/bin/phpmd
 
+RUN  echo "export PATH=$PATH:/root/.composer/vendor/bin/" >> /root/.bashrc
+
 VOLUME ["/opt"]
 VOLUME ["/workspace"]
