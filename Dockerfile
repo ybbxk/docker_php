@@ -37,13 +37,13 @@ RUN apt-get update && apt-get install -y \
     # phpunit
     && curl https://phar.phpunit.de/phpunit-7.phar -o /usr/local/bin/phpunit \
     && chmod 755 /usr/local/bin/phpunit \
-    && usermod -u 1000 www-data -d /home/www-data \
+    && usermod -u 1000 www-data \
     # composer
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
-    && su - www-data 'composer config -g repo.packagist composer https://packagist.phpcomposer.com' \
-    && echo "export PATH=$PATH:/home/www-data/.composer/vendor/bin/" >> /home/www-data/.bashrc \
+    && composer config -g repo.packagist composer https://packagist.phpcomposer.com \
+    && echo "export PATH=$PATH:/root/.composer/vendor/bin/" >> /root/.bashrc \
     # code sniffer
-    && su - www-data 'composer global require "squizlabs/php_codesniffer=*"' \
+    && composer global require "squizlabs/php_codesniffer=*" \
     # phpmd
     && http://static.phpmd.org/php/latest/phpmd.phar /usr/local/bin/phpmd \
     && chmod 755 /usr/local/bin/phpmd 
