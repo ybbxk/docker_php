@@ -45,7 +45,7 @@ RUN apt-get update && apt-get install -y \
     # code sniffer
     && composer global require "squizlabs/php_codesniffer=*" \
     # phpmd
-    && http://static.phpmd.org/php/latest/phpmd.phar /usr/local/bin/phpmd \
+    && curl http://static.phpmd.org/php/latest/phpmd.phar -o /usr/local/bin/phpmd \
     && chmod 755 /usr/local/bin/phpmd 
 
 VOLUME ["/opt"]
