@@ -37,10 +37,10 @@ RUN apt-get update && apt-get install -y \
     # phpunit
     && curl https://phar.phpunit.de/phpunit-7.phar -o /usr/local/bin/phpunit \
     && chmod 755 /usr/local/bin/phpunit \
-    && usermod -u 1000 www-data \
+    && usermod -u 1000 -s /bin/bash www-data \
     # composer
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
-    && composer config -g repo.packagist composer https://packagist.phpcomposer.com \
+    && su - www-data -c 'composer config -g repo.packagist composer https://packagist.laravel-china.org' \
     && echo "export PATH=$PATH:/root/.composer/vendor/bin/" >> /root/.bashrc \
     # code sniffer
     && composer global require "squizlabs/php_codesniffer=*" \
