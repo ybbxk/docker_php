@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
     && cd cphalcon/build && ./install && echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
     # pecl
     && pecl install xdebug redis swoole \
+    && docker-php-ext-install soap xsl sodium sockets gmp simplexml \
     && docker-php-ext-enable xdebug redis soap xsl sodium sockets gmp simplexml \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_mode=\"req\"" >> /usr/local/etc/php/conf.d/xdebug.ini \
