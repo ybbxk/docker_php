@@ -1,6 +1,5 @@
 FROM php:7.2-fpm
 ADD php.ini    /usr/local/etc/php/php.ini
-
 ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 
 WORKDIR /root/
@@ -30,6 +29,7 @@ RUN apt-get update && apt-get install -y \
     # phalcon
     && git clone --depth=1 git://github.com/phalcon/cphalcon.git \
     && cd cphalcon/build && ./install && echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
+    && rm -rf /root/cphalcon \
     # pecl
     && pecl install xdebug redis swoole \
     && docker-php-ext-install soap xsl sodium sockets gmp simplexml \
