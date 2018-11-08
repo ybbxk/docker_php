@@ -38,8 +38,6 @@ RUN apt-get update && apt-get install -y \
     && echo "xdebug.remote_mode=\"req\"" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_handler=\"dbgp\"" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.idekey=bdb" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_host=10.0.75.1" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/xdebug.ini \
     # phpunit
     && curl -L https://phar.phpunit.de/phpunit-7.phar -o /usr/local/bin/phpunit \
