@@ -34,7 +34,8 @@ RUN git clone https://github.com/jbboehr/php-psr.git \
     && ./configure --with-php-config=/usr/local/bin/php-config \
     && make \
     && make install \
-    && cd ..;rm -rf php-psr
+    && cd ..;rm -rf php-psr \
+    && echo extension=psr.so | tee -a /usr/local/etc/php/conf.d/psr.ini
     # phalcon
 RUN git clone --depth=1 git://github.com/phalcon/cphalcon.git \
     && cd cphalcon/build && ./install && echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
