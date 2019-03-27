@@ -35,13 +35,14 @@ RUN git clone https://github.com/jbboehr/php-psr.git \
     && make \
     && make install \
     && cd ..;rm -rf php-psr \
-    && echo extension=psr.so | tee -a /usr/local/etc/php/conf.d/psr.ini
+    && echo "extension=psr.so" >> /usr/local/etc/php/conf.d/psr.ini 
+RUN kill -USR2 1
     # phalcon
 RUN git clone --depth=1 git://github.com/phalcon/cphalcon.git \
     && cd cphalcon/build && ./install && echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
     && rm -rf /root/cphalcon
     # pecl
-RUN pecl install xdebug-2.7.0RC1 redis swoole \
+RUN pecl install xdebug redis swoole \
     && docker-php-ext-install soap xsl sodium sockets gmp simplexml \
     && docker-php-ext-enable xdebug \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
