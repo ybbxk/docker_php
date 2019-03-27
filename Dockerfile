@@ -27,10 +27,18 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install zip \
     && docker-php-ext-install bcmath
+    #psr
+RUN git clone https://github.com/jbboehr/php-psr.git \
+    && cd php-psr \
+    && /usr/local/bin/phpize \
+    && ./configure --with-php-config=/usr/local/bin/php-config \
+    && make \
+    && make install \
+    && cd ..;rm -rf php-psr
     # phalcon
-#RUN git clone --depth=1 git://github.com/phalcon/cphalcon.git \
-#    && cd cphalcon/build && ./install && echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
-#    && rm -rf /root/cphalcon
+RUN git clone --depth=1 git://github.com/phalcon/cphalcon.git \
+    && cd cphalcon/build && ./install && echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
+    && rm -rf /root/cphalcon
     # pecl
 RUN pecl install xdebug-2.7.0RC1 redis swoole \
     && docker-php-ext-install soap xsl sodium sockets gmp simplexml \
