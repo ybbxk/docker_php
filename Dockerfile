@@ -1,15 +1,13 @@
-FROM php:7.3-fpm
+FROM php:7.3-alpine
 ADD php.ini    /usr/local/etc/php/php.ini
 ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 
 WORKDIR /root/
-RUN apt-get update && apt-get install -y \
+RUN apk update --update && apk add \
+        --no-cache \
         libmcrypt-dev \
-        libicu-dev \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
+        libjpeg-turbo-dev \
         libpng-dev \
-        libpcre3-dev\
         git \
         libzip-dev \
         unzip \
@@ -17,8 +15,11 @@ RUN apt-get update && apt-get install -y \
         libxml2-dev \
         libxslt-dev \
         libsodium-dev \
-	libgmp3-dev \
-    && docker-php-ext-install -j$(nproc) intl \
+        freetype-dev \
+        pcre-dev \
+        gmp-dev \
+        icu-dev
+RUN docker-php-ext-install -j$(nproc) intl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install mysqli \
