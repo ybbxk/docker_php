@@ -6,6 +6,7 @@ WORKDIR /root/
 RUN apk update --update && apk add --no-cache \
         ${PHPIZE_DEPS} \
         libmcrypt-dev \
+	shadow \
         libjpeg-turbo-dev \
         libpng-dev \
         git \
