@@ -29,14 +29,14 @@ RUN docker-php-ext-install -j$(nproc) intl \
     && docker-php-ext-install zip \
     && docker-php-ext-install bcmath
     #psr
-RUN git clone https://github.com/jbboehr/php-psr.git \
-    && cd php-psr \
-    && /usr/local/bin/phpize \
-    && ./configure --with-php-config=/usr/local/bin/php-config \
-    && make \
-    && make install \
-    && cd ..;rm -rf php-psr \
-    && echo "extension=psr.so" >> /usr/local/etc/php/conf.d/psr.ini 
+#RUN git clone https://github.com/jbboehr/php-psr.git \
+#    && cd php-psr \
+#    && /usr/local/bin/phpize \
+#    && ./configure --with-php-config=/usr/local/bin/php-config \
+#    && make \
+#    && make install \
+#    && cd ..;rm -rf php-psr \
+#    && echo "extension=psr.so" >> /usr/local/etc/php/conf.d/psr.ini 
 #RUN kill -USR2 1
 #    # phalcon
 #RUN git clone --depth=1 git://github.com/phalcon/cphalcon.git \
