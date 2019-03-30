@@ -4,8 +4,7 @@ ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 
 WORKDIR /root/
 RUN apk update --update && apk add --no-cache \
-        #${PHPIZE_DEPS} \
-        autoconf \
+        ${PHPIZE_DEPS} \
         libmcrypt-dev \
         libjpeg-turbo-dev \
         libpng-dev \
