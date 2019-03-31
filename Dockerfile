@@ -69,5 +69,8 @@ RUN composer global require "squizlabs/php_codesniffer=*"
 RUN curl -L http://static.phpmd.org/php/latest/phpmd.phar -o /usr/local/bin/phpmd \
     && chmod 755 /usr/local/bin/phpmd 
 
+RUN apk del shadow \
+    ${PHPIZE_DEPS}
+
 VOLUME ["/opt"]
 VOLUME ["/workspace"]
