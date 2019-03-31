@@ -55,7 +55,7 @@ RUN pecl install xdebug redis swoole \
     # phpunit
 RUN curl -L https://phar.phpunit.de/phpunit-7.phar -o /usr/local/bin/phpunit \
     && chmod 755 /usr/local/bin/phpunit \
-    && usermod -u 1000 -s /bin/bash -d /home/www-data www-data \
+    && usermod -u 1000 -s /bin/sh -d /home/www-data www-data \
     && groupmod -g 1000 www-data \
     && mkdir -p /home/www-data \
     && chown www-data:www-data /home/www-data
