@@ -57,7 +57,7 @@ RUN curl -L https://phar.phpunit.de/phpunit-7.phar -o /usr/local/bin/phpunit \
     && chmod 755 /usr/local/bin/phpunit \
     && usermod -u 1000 -s /bin/bash -d /home/www-data www-data \
     && groupmod -g 1000 www-data \
-    && mkdir /home/www-data \
+    && mkdir -p /home/www-data \
     && chown www-data:www-data /home/www-data
     # composer
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
