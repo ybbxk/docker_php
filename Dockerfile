@@ -1,6 +1,6 @@
-FROM php:7.3-alpine
+FROM php:7.3-fpm-alpine
 ADD php.ini    /usr/local/etc/php/php.ini
-ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
+#ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 
 WORKDIR /root/
 RUN apk update --update && apk add --no-cache \
@@ -66,8 +66,8 @@ RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-di
     # code sniffer
 RUN composer global require "squizlabs/php_codesniffer=*"
     # phpmd
-RUN curl -L http://static.phpmd.org/php/latest/phpmd.phar -o /usr/local/bin/phpmd \
-    && chmod 755 /usr/local/bin/phpmd 
+ADD phpmd.phar /usr/local/bin/phpmd
+RUN chmod 755 /usr/local/bin/phpmd 
 
 RUN apk del shadow \
     ${PHPIZE_DEPS}
