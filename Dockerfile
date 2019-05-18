@@ -28,9 +28,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip \
     && docker-php-ext-install bcmath
     # phalcon
-RUN git clone --depth=1 git://github.com/phalcon/cphalcon.git \
-    && cd cphalcon/build && ./install && echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
-    && rm -rf /root/cphalcon
+#RUN git clone --depth=1 git://github.com/phalcon/cphalcon.git \
+#    && cd cphalcon/build && ./install && echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
+#    && rm -rf /root/cphalcon
     # pecl
 RUN pecl install xdebug redis swoole \
     && docker-php-ext-install soap xsl sodium sockets gmp simplexml \
@@ -54,8 +54,8 @@ RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-di
     # code sniffer
 RUN composer global require "squizlabs/php_codesniffer=*"
     # phpmd
-RUN curl -L http://static.phpmd.org/php/latest/phpmd.phar -o /usr/local/bin/phpmd \
-    && chmod 755 /usr/local/bin/phpmd 
+ADD phpmd.phar /usr/local/bin/phpmd
+RUN chmod 755 /usr/local/bin/phpmd 
 
 VOLUME ["/opt"]
 VOLUME ["/workspace"]
