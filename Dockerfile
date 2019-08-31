@@ -34,7 +34,8 @@ RUN apt-get update && apt-get install -y \
     # pecl
 RUN pecl install xdebug redis swoole \
     && docker-php-ext-install soap xsl sodium sockets gmp simplexml \
-    && docker-php-ext-enable xdebug redis soap xsl sodium sockets gmp simplexml \
+    #&& docker-php-ext-enable xdebug redis soap xsl sodium sockets gmp simplexml \
+    && docker-php-ext-enable xdebug redis swoole \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_mode=\"req\"" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_handler=\"dbgp\"" >> /usr/local/etc/php/conf.d/xdebug.ini \
@@ -54,8 +55,8 @@ RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-di
     # code sniffer
 RUN composer global require "squizlabs/php_codesniffer=*"
     # phpmd
-ADD phpmd.phar /usr/local/bin/phpmd
-RUN chmod 755 /usr/local/bin/phpmd 
+#ADD phpmd.phar /usr/local/bin/phpmd
+#RUN chmod 755 /usr/local/bin/phpmd 
 
 VOLUME ["/opt"]
 VOLUME ["/workspace"]
