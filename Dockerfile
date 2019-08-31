@@ -49,7 +49,7 @@ RUN curl -L https://phar.phpunit.de/phpunit-7.phar -o /usr/local/bin/phpunit \
     && chown www-data:www-data /home/www-data
     # composer
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
-    && su - www-data -c 'composer config -g repo.packagist composer https://packagist.laravel-china.org' \
+    && su - www-data -c 'composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/' \
     && echo "export PATH=$PATH:/root/.composer/vendor/bin/" >> /root/.bashrc
     # code sniffer
 RUN composer global require "squizlabs/php_codesniffer=*"
