@@ -20,6 +20,7 @@ RUN apk update --update && apk add --no-cache \
         libxml2-dev \
         libxslt-dev \
         libsodium-dev \
+        freetype \
         freetype-dev \
         pcre-dev \
         gmp-dev \
@@ -27,8 +28,8 @@ RUN apk update --update && apk add --no-cache \
         oniguruma \
         oniguruma-dev 
 RUN docker-php-ext-configure intl \
-    &&docker-php-ext-install -j$(nproc) intl \
-    #&& docker-php-ext-configure gd \
+    && docker-php-ext-install -j$(nproc) intl \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
     && docker-php-ext-configure zip \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install mysqli \
@@ -36,7 +37,8 @@ RUN docker-php-ext-configure intl \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install zip \
-    && docker-php-ext-install bcmath
+    && docker-php-ext-install bcmath \
+    && docker-php-ext-enable gd
     #psr
 #RUN git clone https://github.com/jbboehr/php-psr.git \
 #    && cd php-psr \
