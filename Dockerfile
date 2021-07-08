@@ -1,8 +1,11 @@
-FROM php:7.4-fpm-alpine
+FROM php:7.4-fpm-alpine3.13
 ADD php.ini    /usr/local/etc/php/php.ini
 #ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 
-WORKDIR /root/
+WORKDIR /usr/share/nginx/html/
+
+RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
+RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
 
 RUN apk update --update && apk add --no-cache \
         ${PHPIZE_DEPS} \
