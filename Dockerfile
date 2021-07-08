@@ -49,7 +49,7 @@ RUN docker-php-ext-configure intl \
 #    && cd cphalcon/build && ./install && echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
 #    && rm -rf /root/cphalcon
     # pecl
-RUN pecl install xdebug redis swoole \
+RUN pecl install xdebug-2.9.8 redis swoole \
     && docker-php-ext-install soap xsl sodium sockets gmp simplexml \
     && docker-php-ext-enable xdebug \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
