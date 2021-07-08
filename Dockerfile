@@ -23,7 +23,8 @@ RUN apk update --update && apk add --no-cache \
         icu-dev \
         oniguruma \
         oniguruma-dev 
-RUN docker-php-ext-install -j$(nproc) intl \
+RUN docker-php-ext-configure intl \
+    &&docker-php-ext-install -j$(nproc) intl \
     #&& docker-php-ext-configure gd \
     && docker-php-ext-configure zip \
     && docker-php-ext-install -j$(nproc) gd \
