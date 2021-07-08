@@ -3,6 +3,7 @@ ADD php.ini    /usr/local/etc/php/php.ini
 #ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 
 WORKDIR /root/
+
 RUN apk update --update && apk add --no-cache \
         ${PHPIZE_DEPS} \
         libmcrypt-dev \
@@ -19,9 +20,12 @@ RUN apk update --update && apk add --no-cache \
         freetype-dev \
         pcre-dev \
         gmp-dev \
-        icu-dev
+        icu-dev \
+        oniguruma \
+        oniguruma-dev 
 RUN docker-php-ext-install -j$(nproc) intl \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    #&& docker-php-ext-configure gd \
+    && docker-php-ext-configure zip \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install mysqli \
     && docker-php-ext-install pdo \
