@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
         libxslt-dev \
         libsodium-dev \
 	libgmp3-dev \
-    && docker-php-ext-configure intl gd \
+    && docker-php-ext-configure intl \
     && docker-php-ext-install -j$(nproc) intl \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install mysqli \
