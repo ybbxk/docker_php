@@ -27,4 +27,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: php/php:alpine-8.1
+          tags: ybbxk/php:alpine-8.1
