@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.2-fpm-alpine
 ADD php.ini    /usr/local/etc/php/php.ini
 #ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 
