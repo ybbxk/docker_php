@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine3.13
+FROM php:8.1-fpm-alpine
 ADD php.ini    /usr/local/etc/php/php.ini
 #ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 
@@ -10,7 +10,7 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/community/ >> /etc/apk/reposi
 RUN apk update --update && apk add --no-cache \
         ${PHPIZE_DEPS} \
         libmcrypt-dev \
-	shadow \
+	    shadow \
         libjpeg-turbo-dev \
         libpng-dev \
         git \
@@ -26,7 +26,8 @@ RUN apk update --update && apk add --no-cache \
         gmp-dev \
         icu-dev \
         oniguruma \
-        oniguruma-dev 
+        oniguruma-dev \
+        linux-headers
 RUN docker-php-ext-configure intl \
     && docker-php-ext-install -j$(nproc) intl \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
@@ -54,14 +55,14 @@ RUN docker-php-ext-configure intl \
 #    && cd cphalcon/build && ./install && echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
 #    && rm -rf /root/cphalcon
     # pecl
-RUN pecl install xdebug-2.9.8 redis swoole \
-    && docker-php-ext-install soap xsl sodium sockets gmp simplexml \
-    && docker-php-ext-enable xdebug \
-    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.remote_mode=\"req\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.remote_handler=\"dbgp\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN pecl install xdebug redis swoole \
+    && docker-php-ext-install soap xsl sodium sockets gmp simplexml
+    # && docker-php-ext-enable xdebug \
+    # && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    # && echo "xdebug.remote_mode=\"req\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    # && echo "xdebug.remote_handler=\"dbgp\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    # && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    # && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     # phpunit
 RUN curl -L https://phar.phpunit.de/phpunit-7.phar -o /usr/local/bin/phpunit \
     && chmod 755 /usr/local/bin/phpunit \
