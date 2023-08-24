@@ -1,6 +1,6 @@
 FROM php:8.1-fpm-alpine
 ADD php.ini    /usr/local/etc/php/php.ini
-ADD xdebug.ini    /usr/local/etc/php/xdebug.ini
+ADD xdebug.ini    /usr/local/etc/php/conf.d/xdebug.ini
 #ADD php-fpm.conf    /usr/local/etc/php-fpm.conf
 
 WORKDIR /usr/share/nginx/html/
